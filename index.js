@@ -20,7 +20,9 @@ app.get('/batches', (req, res, next) => {
       })
       .catch((error) => next(error))
       })
-  .post('/batches', authenticate, (req, res, next) => {
+  .post('/batches',
+  // authenticate,
+   (req, res, next) => {
     let newBatch = req.body
     // newGame.userId = req.account._id
     // newGame.grid=getNewGrid()

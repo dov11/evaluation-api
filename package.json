@@ -5,10 +5,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "dev": "nodemon --inspect src/"
   },
   "dependencies": {
     "express": "^4.16.2",
     "mongoose": "^4.13.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.5"
   }
 }
