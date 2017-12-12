@@ -18,24 +18,26 @@
             "colorCode": "Yellow",
             "evaluationDate": "2017-11-01",
             "comment": "Needs work"
+          }
+        ]
+      },
+      {
+        "firstName": "Turk",
+        "lastName": "Turkleton",
+        "linkToPhoto": "https://vignette.wikia.nocookie.net/scrubs/images/c/c6/S8-HQ-Turk-5.jpg/revision/latest?cb=20091115221934",
+        "performanceCodes": [
+          {
+            "colorCode": "Red",
+            "evaluationDate": "2017-10-30",
+            "comment": "Too cocky"
           },
           {
-            "firstName": "Turk",
-            "lastName": "Turkleton",
-            "linkToPhoto": "https://vignette.wikia.nocookie.net/scrubs/images/c/c6/S8-HQ-Turk-5.jpg/revision/latest?cb=20091115221934",
-            "performanceCodes": [
-              {
-                "colorCode": "Red",
-                "evaluationDate": "2017-10-30",
-                "comment": "Too cocky"
-              },
-              {
-                "colorCode": "Green",
-                "evaluationDate": "2017-11-01",
-                "comment": "Much better"
-              }
-            ]
+            "colorCode": "Green",
+            "evaluationDate": "2017-11-01",
+            "comment": "Much better"
           }
         ]
       }
     ]
+  }
+]

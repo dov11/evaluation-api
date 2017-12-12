@@ -12,6 +12,7 @@ mongoose.connect(MONGODB_URI, { useMongoClient: true })
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {
+  console.log(MONGODB_URI)
   console.log('Successfully connected to MongoDB!')
 })
 

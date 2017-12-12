@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { batches } = require('./routes')
+const { batches, users, sessions } = require('./routes')
 const passport = require('./config/auth')
 
 const PORT = process.env.PORT || 3030
@@ -9,7 +9,10 @@ let app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
+  .use(passport.initialize())
   .use(batches)
+  .use(users)
+  .use(sessions)
   .use((req, res, next) => {
     const err = new Error('Not Found')
     err.status = 404
