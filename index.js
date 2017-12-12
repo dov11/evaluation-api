@@ -1,16 +1,19 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const { Batch } = require('./models')
 
 const PORT = process.env.PORT || 3030
 
 let app = express()
 
-app.get('/batches', (req, res, next) => {
-  Batch.find()
-  .sort({ createdAt: -1 })
-  .then((recipes) => res.json(recipes))
-  .catch((error) => next(error))
-})
+app.use(bodyParser.urlencoded({ extended: true }))
+  .use(bodyParser.json())
+  .get('/batches', (req, res, next) => {
+    Batch.find()
+    .sort({ createdAt: -1 })
+    .then((recipes) => res.json(recipes))
+    .catch((error) => next(error))
+  })
   .get('/batches/:id', (req, res, next) => {
     const id = req.params.id
     Batch.findById(id)
