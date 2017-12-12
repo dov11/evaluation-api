@@ -2,7 +2,9 @@ const mongoose = require('../config/database')
 const { Schema } = mongoose
 
 const performanceCodeSchema = new Schema({
-  performanceCode: { type: String, required: false },
+  colorCode: { type: String, required: false },
+  evaluationDate: { type: Date, required: false },
+  comment: {type: String, required: false}
 })
 
 const studentSchema = new Schema({
