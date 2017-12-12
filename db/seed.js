@@ -14,7 +14,7 @@ const createBatches = (token) => {
     .set('Authorization', `Bearer ${token}`)
     .send(batch)
     .then((res) => {
-      console.log('Recipe seeded...')
+      console.log('Batch seeded...')
     })
     .catch((err) => {
       console.error('Error seeding batch!', err)
