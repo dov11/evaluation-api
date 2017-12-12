@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const { batches } = require('./routes')
+const passport = require('./config/auth')
 
 const PORT = process.env.PORT || 3030
 
