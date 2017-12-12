@@ -1,0 +1,7 @@
+{
+  "name": "evaluation-api",
+  "version": "1.0.0",
+  "description": "RESTful API for evaluation tool",
+  "main": "index.js",
+  "license": "MIT"
+}
