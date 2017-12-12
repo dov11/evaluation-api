@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { Batch } = require('./models')
+const { batches } = require('./routes')
 
 const PORT = process.env.PORT || 3030
 
@@ -8,31 +8,19 @@ let app = express()
 
 app.use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
-  .get('/batches', (req, res, next) => {
-    Batch.find()
-    .sort({ createdAt: -1 })
-    .then((recipes) => res.json(recipes))
-    .catch((error) => next(error))
+  .use(batches)
+  .use((req, res, next) => {
+    const err = new Error('Not Found')
+    err.status = 404
+    next(err)
   })
-  .get('/batches/:id', (req, res, next) => {
-    const id = req.params.id
-    Batch.findById(id)
-      .then((game) => {
-        if (!game) { return next() }
-        res.json(game)
-      })
-      .catch((error) => next(error))
-      })
-  .post('/batches',
-  // authenticate,
-   (req, res, next) => {
-    let newBatch = req.body
-    // newGame.userId = req.account._id
-    // newGame.grid=getNewGrid()
 
-    Batch.create(newBatch)
-      .then((game) => res.json(game))
-      .catch((error) => next(error))
+  .use((err, req, res, next) => {
+    res.status(err.status || 500)
+    res.send({
+      message: err.message,
+      error: app.get('env') === 'development' ? err : {}
+    })
   })
 
 app.listen(PORT, () => {
