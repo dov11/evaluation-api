@@ -11,6 +11,24 @@ app.get('/batches', (req, res, next) => {
   .then((recipes) => res.json(recipes))
   .catch((error) => next(error))
 })
+  .get('/batches/:id', (req, res, next) => {
+    const id = req.params.id
+    Batch.findById(id)
+      .then((game) => {
+        if (!game) { return next() }
+        res.json(game)
+      })
+      .catch((error) => next(error))
+      })
+  .post('/batches', authenticate, (req, res, next) => {
+    let newBatch = req.body
+    // newGame.userId = req.account._id
+    // newGame.grid=getNewGrid()
+
+    Batch.create(newBatch)
+      .then((game) => res.json(game))
+      .catch((error) => next(error))
+  })
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`)
