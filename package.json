@@ -3,5 +3,11 @@
   "version": "1.0.0",
   "description": "RESTful API for evaluation tool",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node ."
+  },
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
