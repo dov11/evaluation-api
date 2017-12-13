@@ -15,5 +15,23 @@ router.get('/batches/:id1/:id2', (req, res, next) => {
   })
   .catch((error) => next(error))
 })
+.patch('/batches/:id',
+  // authenticate,
+  (req, res, next) => {
+  const id = req.params.id
+  let newStudent = req.body
+  console.log('here')
+  console.log(newStudent)
+  Batch.findById(id)
+  .then((batch) => {
+    if(!batch) {return next()}
+    const updatedStudents = [newStudent].concat(batch.students)
+    console.log(updatedStudents)
+    Batch.findByIdAndUpdate(id, { students: updatedStudents }, { new: true })
+    .then((batch) => res.json(batch))
+  })
+
+    .catch((error) => next(error))
+})
 
 module.exports = router
