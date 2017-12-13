@@ -1,0 +1,43 @@
+[
+  {
+    "batchNumber": 1,
+    "startDate": "2017-10-30",
+    "endDate": "2018-01-10",
+    "students": [
+      {
+        "firstName": "J",
+        "lastName": "D",
+        "linkToPhoto": "https://vignette.wikia.nocookie.net/scrubs/images/c/c2/S1-HQ-JD.jpg/revision/latest?cb=20111026062113",
+        "performanceCodes": [
+          {
+            "colorCode": "Green",
+            "evaluationDate": "2017-10-30",
+            "comment": "Well done"
+          },
+          {
+            "colorCode": "Yellow",
+            "evaluationDate": "2017-11-01",
+            "comment": "Needs work"
+          }
+        ]
+      },
+      {
+        "firstName": "Turk",
+        "lastName": "Turkleton",
+        "linkToPhoto": "https://vignette.wikia.nocookie.net/scrubs/images/c/c6/S8-HQ-Turk-5.jpg/revision/latest?cb=20091115221934",
+        "performanceCodes": [
+          {
+            "colorCode": "Red",
+            "evaluationDate": "2017-10-30",
+            "comment": "Too cocky"
+          },
+          {
+            "colorCode": "Green",
+            "evaluationDate": "2017-11-01",
+            "comment": "Much better"
+          }
+        ]
+      }
+    ]
+  }
+]
