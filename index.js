@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { batches, users, sessions } = require('./routes')
+const { batches, users, sessions, students } = require('./routes')
 const passport = require('./config/auth')
 const cors = require('cors')
 
@@ -15,6 +15,7 @@ app.use(cors())
   .use(batches)
   .use(users)
   .use(sessions)
+  .use(students)
   .use((req, res, next) => {
     const err = new Error('Not Found')
     err.status = 404
