@@ -14,9 +14,20 @@ router.get('/batches', (req, res, next) => {
 .get('/batches/:id', (req, res, next) => {
   const id = req.params.id
   Batch.findById(id)
-    .then((game) => {
-      if (!game) { return next() }
-      res.json(game)
+    .then((batch) => {
+      if (!batch) { return next() }
+      res.json(batch)
+    })
+    .catch((error) => next(error))
+    })
+.get('/batches/:id1/:id2', (req, res, next) => {
+  const id1 = req.params.id1
+  const id2 = req.params.id2
+  Batch.findById(id1)
+    .then((batch) => {
+      if (!batch) { return next() }
+      console.log(batch.students.filter(student=>student._id == id2)[0])
+      res.json(batch.students.filter(student=>student._id == id2)[0])
     })
     .catch((error) => next(error))
     })
