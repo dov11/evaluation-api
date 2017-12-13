@@ -28,8 +28,14 @@ router.get('/batches', (req, res, next) => {
   // newGame.grid=getNewGrid()
 
   Batch.create(newBatch)
-    .then((game) => res.json(game))
+    .then((batch) => res.json(batch))
     .catch((error) => next(error))
 })
-
+.delete('/batches/:id', (req, res, next) => {
+  console.log("here")
+    const id = req.params.id
+    Batch.findByIdAndRemove(id)
+        .then(() => res.json(id))
+        .catch((error) => next(error))
+})
 module.exports = router
