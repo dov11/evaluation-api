@@ -66,10 +66,24 @@ router.get('/batches/:id1/:id2', (req, res, next) => {
     .then((batch) => res.json(batch))
   })
 
+
     .catch((error) => {
       console.log(error)
       next(error)
     })
+})
+.delete('/batches/:idB/:idS',
+// authenticate,
+(req, res, next) => {
+  const idB = req.params.idB
+  const idS = req.params.idS
+  Batch.findById(idB)
+  .then((batch) => {
+    if(!batch) {return next()}
+    const remainingStudents = batch.students.filter(student=>student._id!=idS)
+    Batch.findByIdAndUpdate(idB, { students: remainingStudents }, { new: true })
+    .then((batch) => res.json(batch))
+  })
 })
 
 module.exports = router
