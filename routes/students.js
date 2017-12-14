@@ -20,18 +20,56 @@ router.get('/batches/:id1/:id2', (req, res, next) => {
   (req, res, next) => {
   const id = req.params.id
   let newStudent = req.body
-  console.log('here')
-  console.log(newStudent)
   Batch.findById(id)
   .then((batch) => {
     if(!batch) {return next()}
     const updatedStudents = [newStudent].concat(batch.students)
-    console.log(updatedStudents)
     Batch.findByIdAndUpdate(id, { students: updatedStudents }, { new: true })
     .then((batch) => res.json(batch))
   })
 
     .catch((error) => next(error))
+})
+.patch('/batches/:id1/:id2',
+  // authenticate,
+  (req, res, next) => {
+  const id1 = req.params.id1
+  const id2 = req.params.id2
+  let evaluation = req.body
+  evaluationDateNew = new Date(evaluation.evaluationDate).toDateString()
+  Batch.findById(id1)
+  .then((batch) => {
+    if(!batch) {return next()}
+    //clusterfuck below :'( needs refactoring
+    const updatedStudentsWithEvals = batch.students.map(student=>{
+      if (student._id==id2) {
+        let evaluationDates=student.performanceCodes.map(code=>code.evaluationDate.toDateString())
+        let updatedCodes = evaluationDates.includes(evaluationDateNew) ?
+        student.performanceCodes.map(code=>{
+          if (code.evaluationDate.toDateString()===evaluationDateNew) {
+            return evaluation
+          }
+          return code
+        })
+         :
+        [evaluation].concat(student.performanceCodes)
+        return {
+          _id: student._id,
+          firstName: student.firstName,
+          lastName: student.lastName,
+          linkToPhoto: student.linkToPhoto,
+          performanceCodes: updatedCodes}
+      }
+      return student
+    })
+    Batch.findByIdAndUpdate(id1, { students: updatedStudentsWithEvals }, { new: true })
+    .then((batch) => res.json(batch))
+  })
+
+    .catch((error) => {
+      console.log(error)
+      next(error)
+    })
 })
 
 module.exports = router
