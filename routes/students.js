@@ -23,12 +23,27 @@ router.get('/batches/:id1/:id2', (req, res, next) => {
   Batch.findById(id)
   .then((batch) => {
     if(!batch) {return next()}
-    const updatedStudents = [newStudent].concat(batch.students)
+    let updatedStudents = []
+    if (!!newStudent._id) {
+      updatedStudents = batch.students
+      .map(student=>{
+        if (student._id.toString()===newStudent._id.toString()) {
+          return newStudent
+        }
+        return student
+      })
+    }
+    else {
+      updatedStudents = [newStudent].concat(batch.students)
+    }
     Batch.findByIdAndUpdate(id, { students: updatedStudents }, { new: true })
     .then((batch) => res.json(batch))
   })
 
-    .catch((error) => next(error))
+    .catch((error) => {
+      console.log(error)
+      next(error)
+    })
 })
   .patch('/batches/:id1/:id2',
   // authenticate,
