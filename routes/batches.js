@@ -5,13 +5,13 @@ const passport = require('../config/auth')
 
 const authenticate = passport.authorize('jwt', { session: false })
 
-router.get('/batches', (req, res, next) => {
+router.get('/batches', authenticate, (req, res, next) => {
   Batch.find()
   .sort({ createdAt: -1 })
   .then((batches) => res.json(batches))
   .catch((error) => next(error))
 })
-.get('/batches/:id', (req, res, next) => {
+.get('/batches/:id', authenticate, (req, res, next) => {
   const id = req.params.id
   Batch.findById(id)
     .then((batch) => {
@@ -21,17 +21,15 @@ router.get('/batches', (req, res, next) => {
     .catch((error) => next(error))
     })
 .post('/batches',
- // authenticate,
+ authenticate,
  (req, res, next) => {
   let newBatch = req.body
-  // newGame.userId = req.account._id
-  // newGame.grid=getNewGrid()
 
   Batch.create(newBatch)
     .then((batch) => res.json(batch))
     .catch((error) => next(error))
 })
-.delete('/batches/:id', (req, res, next) => {
+.delete('/batches/:id', authenticate, (req, res, next) => {
   console.log("here")
     const id = req.params.id
     Batch.findByIdAndRemove(id)
