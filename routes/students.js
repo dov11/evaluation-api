@@ -16,7 +16,7 @@ router.get('/batches/:id1/:id2', (req, res, next) => {
   .catch((error) => next(error))
 })
   .patch('/batches/:id',
-  // authenticate,
+  authenticate,
   (req, res, next) => {
   const id = req.params.id
   let newStudent = req.body
@@ -46,7 +46,7 @@ router.get('/batches/:id1/:id2', (req, res, next) => {
     })
 })
   .patch('/batches/:id1/:id2',
-  // authenticate,
+  authenticate,
   (req, res, next) => {
     const id1 = req.params.id1
     const id2 = req.params.id2
@@ -94,7 +94,7 @@ router.get('/batches/:id1/:id2', (req, res, next) => {
     })
   })
 .delete('/batches/:idB/:idS',
-// authenticate,
+authenticate,
 (req, res, next) => {
   const idB = req.params.idB
   const idS = req.params.idS
